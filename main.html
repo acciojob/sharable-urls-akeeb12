@@ -1,8 +1,30 @@
 <!DOCTYPE html>
 <html>
   <body>
+		<label for="name">Name:</label>
+			<input type = "text" id ="name" name = "name">
+			<br>
+			<label for = "year"> Year: </label>
+			<input type = "number" id="year" name="year">
+			<br>
+			<button id="button">submit</button>
+		<br>
+			<h3 id="url">https://localhost:8080/</h3>
     <script type="text/javascript" src="./script.js">
+	  
+		document.getElementById("button").addEventListener("click", function(){
+			let name = document.getElementById("name").value.trim();
+			let year = document.getElementById("year").value.trim();
+			let baseUrl = "http://localhost:8080/";
+
+			if (name) queryParams.append("name", name);
+			if (year) queryParams.append("year", year);
+
+			let fullUrl = baseUrl + (queryParams.toString() ? "?" + queryParams.toString() : "");
+			document.getElementById("url").textContent = fullUrl;
+		});
 </script>
+	  
   </body>
 
 </html>
