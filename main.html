@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html>
   <body>
-		<label for="name">Name:</label><br>
-			<input type = "text" id ="name" name = "name">
-			<br>
-			<label for = "year"> Graduation Year: </label><br>
-			<input type = "number" id="year" name="year">
-			<br>
-			<button id="button">submit</button>
-		<br>
+		  <form id="urlForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" required>
+        <br>
+        <button type="button" id="button">Submit</button>
+    </form>
 			<h3 id="url">https://localhost:8080/</h3>
     <script type="text/javascript" src="./script.js">
 	  
-		document.getElementById("button").addEventListener("click", function(){
-			let name = document.getElementById("name").value.trim();
-			let year = document.getElementById("year").value.trim();
-			let baseUrl = "http://localhost:8080/";
+		document.getElementById('button').addEventListener('click', function() {
+    var name = document.getElementById('name').value;
+    var year = document.getElementById('year').value;
 
-			if (name) queryParams.append("name", name);
-			if (year) queryParams.append("year", year);
-
-			let fullUrl = baseUrl + (queryParams.toString() ? "?" + queryParams.toString() : "");
-			document.getElementById("url").textContent = fullUrl;
-		});
+    if (name && year) {
+        var url = "https://localhost:8080/?name=" + encodeURIComponent(name) + "&year=" + encodeURIComponent(year);
+        document.getElementById('url').textContent = url;
+    } else {
+        alert("Please fill in both fields.");
+    }
+});
 </script>
 	  
   </body>
