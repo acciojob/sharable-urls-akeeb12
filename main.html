@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <body>
-		  <form id="urlForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
-        <label for="year">Year:</label>
-        <input type="number" id="year" name="year" required>
-        <br>
-        <button type="button" id="button">Submit</button>
-    </form>
-			<h3 id="url">https://localhost:8080/</h3>
-    <script type="text/javascript" src="./script.js">
-	  
-		document.getElementById('button').addEventListener('click', function() {
-    var name = document.getElementById('name').value;
-    var year = document.getElementById('year').value;
+<head>
+  <title>Form Query Generator</title>
+</head>
+<body>
 
-    if (name && year) {
-        var url = "https://localhost:8080/?name=" + encodeURIComponent(name) + "&year=" + encodeURIComponent(year);
-        document.getElementById('url').textContent = url;
-    } else {
-        alert("Please fill in both fields.");
+  <form id="myForm" onsubmit="generateURL(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="year">Graduation year:</label>
+    <input type="number" id="year" name="year"><br><br>
+
+    <button type="submit" id="button">Submit</button>
+  </form>
+
+  <h3 id="url">https://localhost:8080/</h3>
+
+  <script>
+    function generateURL(event) {
+      event.preventDefault(); // prevent form submission
+
+      const baseUrl = "https://localhost:8080/";
+      const name = document.getElementById("name").value.trim();
+      const year = document.getElementById("year").value.trim();
+
+      let queryParams = [];
+
+      if (name) {
+        queryParams.push("name=" + encodeURIComponent(name));
+      }
+
+      if (year) {
+        queryParams.push("year=" + encodeURIComponent(year));
+      }
+
+      const finalUrl = queryParams.length > 0 ? baseUrl + "?" + queryParams.join("&") : baseUrl;
+
+      document.getElementById("url").innerText = finalUrl;
     }
-});
-</script>
-	  
-  </body>
+  </script>
 
+</body>
 </html>
